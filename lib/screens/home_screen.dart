@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../consts/app_styles.dart';
-import '../models/product_model.dart';
-import '../widgets/product_card.dart';
+import '../widgets/responsive_grid.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -56,14 +55,15 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            mainAxisExtent: MediaQuery.of(context).size.height / 4 + 90),
-        itemCount: Product.products.length,
-        itemBuilder: (context, index) {
-          final product = Product.products[index];
-          return ProductCard(product: product);
+      // body: ResponsiveGrid(),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 1200) {
+            return const ResponsiveGrid(maxAxisCount: 4);
+          } else if (constraints.maxWidth > 800) {
+            return const ResponsiveGrid(maxAxisCount: 2);
+          }
+          return const ResponsiveGrid(maxAxisCount: 1);
         },
       ),
     );

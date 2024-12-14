@@ -26,6 +26,7 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(product.name, style: AppStyles.h4),
                     Text('\$${product.price}', style: AppStyles.paragraph),
